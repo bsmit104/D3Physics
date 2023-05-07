@@ -16,7 +16,7 @@ class Water9 extends Phaser.Scene {
         // rectangle.setOrigin(0.5);
         // rectangle.setAngle(45);
 
-        const rectangle = this.add.rectangle(300, 400, 500, 200, 0x1E90FF);
+        const rectangle = this.add.rectangle(300, 400, 500, 200, 0xFFFFF);
         // Additional rectangle properties and behaviors
         rectangle.setDepth(1);
 
@@ -28,7 +28,7 @@ class Water9 extends Phaser.Scene {
         // const rectangle3 = this.add.rectangle(1700, 500, 1700, 100, 0x1E90FF);
         // rectangle3.setDepth(1);
 
-        const rectangle4 = this.add.rectangle(1100, 900, 500, 700, 0x1E90FF);
+        const rectangle4 = this.add.rectangle(1100, 700, 500, 500, 0xFFFFF);
         rectangle4.setDepth(1);
 
         this.house = this.add.image(
