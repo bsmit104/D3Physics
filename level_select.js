@@ -1,3 +1,4 @@
+// import Player from './Player.js';
 class Level_select extends Phaser.Scene {
     constructor() {
         super('level_select');
@@ -10,9 +11,13 @@ class Level_select extends Phaser.Scene {
         this.load.image('sat', 'shatturn.png');
         this.load.image('earth', 'earth.png');
         this.load.image('water', 'water9.png');
+        this.load.image('met', 'meteor.png');
     }
 
     create() {
+        // const player = createPlayer(this, 400, 300, 'playerSpriteKey');
+        // this.add.existing(player);
+
         this.blue = this.add.image(
             400,//x
             500,//y
@@ -57,6 +62,8 @@ class Level_select extends Phaser.Scene {
             this.water.setScale(1, -1);
             this.water.setDepth(1)
             this.water.setScale(.3) //resize
+        
+        this.input.on('pointerdown', () => this.scene.start('cheese'));
 
         const space = this.add.image(200, 0, 'space');
         //space.scale(.5);

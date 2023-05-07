@@ -12,7 +12,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Start, Intro, Title, Level_select],
+    scene: [Start, Intro, Title, Level_select, Water9, Sat, Cheese],
     //, Water9, Cheese, Bluecheese, Sat, Earth],
     title: "Sentient Meteor",
 });

@@ -13,8 +13,8 @@ class Intro extends Phaser.Scene {
     }
     create() {
         //this.cameras.main.setBackgroundColor('#ffffff');
-        const backgroundMusic = this.sound.add('logosound', { loop: false });
-        backgroundMusic.play();
+        // const backgroundMusic = this.sound.add('logosound', { loop: false });
+        // backgroundMusic.play();
     /////////////////animated///////////////////
         this.imageObject2 = this.add.sprite(
             900,//x
