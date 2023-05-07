@@ -10,48 +10,26 @@ class Bluecheese extends Phaser.Scene {
 
     create() {
         const rectangle = this.add.rectangle(400, 800, 50, 700, 0xFF8C00);
-        // Additional rectangle properties and behaviors
         rectangle.setDepth(1);
         rectangle.setStrokeStyle(4, 0x4B0082);
-        //rectangle.setOrigin(0.5);
-        //rectangle.setAngle(45);
-
-        // const rectangle = this.add.rectangle(300, 400, 500, 200, 0xFF8C00);
-        // // Additional rectangle properties and behaviors
-        // rectangle.setDepth(1);
 
         const rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x4B0082); // x, y, width, height
-        // Additional rectangle properties and behaviors
         rectangle2.setDepth(1);
         rectangle2.setStrokeStyle(4, 0xFF8C00);
-        // rectangle2.setOrigin(0.5);
 
         const rectangle3 = this.add.rectangle(900, 600, 400, 50, 0xFF8C00);
-        // Additional rectangle properties and behaviors
         rectangle3.setDepth(1);
         rectangle3.setStrokeStyle(4, 0x4B0082);
         rectangle3.setOrigin(0.5);
         rectangle3.setAngle(45);
 
         const rectangle4 = this.add.rectangle(1700, 600, 200, 50, 0xFF8C00);
-        // Additional rectangle properties and behaviors
         rectangle4.setDepth(1);
         rectangle4.setStrokeStyle(4, 0x4B0082);
-        //rectangle4.setOrigin(0.5);
-        //rectangle4.setAngle(-45);
 
         const rectangle5 = this.add.rectangle(1400, 300, 400, 50, 0xFF8C00);
-        // Additional rectangle properties and behaviors
         rectangle5.setDepth(1);
         rectangle5.setStrokeStyle(4, 0x4B0082);
-        //rectangle5.setOrigin(0.5);
-        //rectangle5.setAngle(45);
-
-        // const rectangle3 = this.add.rectangle(1700, 500, 1700, 100, 0x1E90FF);
-        // rectangle3.setDepth(1);
-
-        // const rectangle4 = this.add.rectangle(1100, 900, 500, 700, 0x1E90FF);
-        // rectangle4.setDepth(1);
 
         this.house = this.add.image(
             900,//x
@@ -83,7 +61,6 @@ class Bluecheese extends Phaser.Scene {
 
 
         const space = this.add.image(200, 0, 'space');
-        //space.scale(.5);
         space.setOrigin(0);
         space.setDepth(0);
     }

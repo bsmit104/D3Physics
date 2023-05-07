@@ -9,23 +9,13 @@ class Sat extends Phaser.Scene {
     }
 
     create() {
-                // const rectangle = this.add.rectangle(400, 300, 200, 150, 0xFF0000);
-        // // Additional rectangle properties and behaviors
-        // rectangle.setDepth(1);
-        // rectangle.setStrokeStyle(4, 0x00FF00);
-        // rectangle.setOrigin(0.5);
-        // rectangle.setAngle(45);
-
         const rectangle = this.add.rectangle(100, 500, 500, 100, 0xFF0000);
-        // Additional rectangle properties and behaviors
         rectangle.setDepth(1);
         rectangle.setStrokeStyle(4, 0x00FF00);
 
         const rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0xFF0000); // x, y, width, height
-        // Additional rectangle properties and behaviors
         rectangle2.setDepth(1);
         rectangle2.setStrokeStyle(4, 0x00FF00);
-        // rectangle2.setOrigin(0.5);
 
         const rectangle3 = this.add.rectangle(1700, 500, 1700, 100, 0xFF0000);
         rectangle3.setDepth(1);
@@ -64,7 +54,6 @@ class Sat extends Phaser.Scene {
 
 
         const space = this.add.image(200, 0, 'space');
-        //space.scale(.5);
         space.setOrigin(0);
         space.setDepth(0);
     }
