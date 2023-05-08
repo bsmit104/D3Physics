@@ -63,7 +63,7 @@ class Level_select extends Phaser.Scene {
             this.water.setDepth(1)
             this.water.setScale(.3) //resize
         
-        this.input.on('pointerdown', () => this.scene.start('gameover'));
+        this.input.on('pointerdown', () => this.scene.start('water9'));
 
         const space = this.add.image(200, 0, 'space');
         //space.scale(.5);
