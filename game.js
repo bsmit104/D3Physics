@@ -14,7 +14,28 @@ let currentScene = 0;
 const SCALE = 0.5;
 const tileSize = 35;
 ///////////////
+/////////stats//////////////
 let lives = 3;
+let score = 0;
+let fireballcount = 30;
+/////////house spawn///////////////
+let waterhouse = true;
+let waterhouse2 = true;
+let waterhouse3 = true;
+let sathouse = true;
+let sathouse2 = true;
+let sathouse3 = true;
+let cheesehouse = true;
+let cheesehouse2 = true;
+let cheesehouse3 = true;
+let bluehouse = true;
+let bluehouse2 = true;
+let bluehouse3 = true;
+let earthhouse = true;
+let earthhouse2 = true;
+let earthhouse3 = true;
+
+/////////respawn flash//////////////
 let firstwatervisit = true;
 let firstsatvisit = true;
 let firstcheesevisit = true;
@@ -38,7 +59,13 @@ let config = {
             gravity: {
                 x: 0,
                 y: 0
-            }
+            },
+            bounds: {
+                x: 0,
+                y: 0,
+                width: 1920,
+                height: 1080
+              }
         }
     },
     scene: [Start, Intro, Title, Level_select, Water9, Sat, Cheese, Bluecheese, Earth, Gameover]

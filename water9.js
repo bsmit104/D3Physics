@@ -1,52 +1,3 @@
-// import Player from "./Player.js";
-// class LaserGroup extends Phaser.Physics.Arcade.Group
-// {
-// 	constructor(scene) {
-// 		// Call the super constructor, passing in a world and a scene
-// 		super(scene.physics.world, scene);
- 
-// 		// Initialize the group
-// 		this.createMultiple({
-// 			classType: Laser, // This is the class we create just below
-// 			frameQuantity: 20, // Create 30 instances in the pool
-// 			active: false,
-// 			visible: false,
-// 			key: 'laser'
-// 		})
-// 	}
-
-//   fireLaser(x, y) {
-// 		// Get the first available sprite in the group
-// 		const laser = this.getFirstDead(false);
-// 		if (laser) {
-// 			laser.fire(x, y);
-// 		}
-// 	}
- 
-// }
- 
-// class Laser extends Phaser.Physics.Arcade.Sprite {
-// 	constructor(scene, x, y) {
-// 		super(scene, x, y, 'laser');
-// 	}
-
-//   fire(x, y) {
-// 		this.body.reset(x, y);
- 
-// 		this.setActive(true);
-// 		this.setVisible(true);
- 
-// 		this.setVelocityY(900);
-// 	}
-//   preUpdate(time, delta) {
-// 		super.preUpdate(time, delta);
- 
-// 		if (this.y <= 0) {
-// 			this.setActive(false);
-// 			this.setVisible(false);
-// 		}
-// 	}
-// }
 class Water9 extends Phaser.Scene {
   constructor() {
     super('water9');
@@ -55,7 +6,7 @@ class Water9 extends Phaser.Scene {
   preload() {
     this.load.path = "./assets/";
     this.load.image('space', 'space3.png');
-    this.load.image('house', 'bluetower.png');
+    this.load.image('bluehouse', 'bluetower.png');
     this.load.image('met', 'meteor.png');
     this.load.image('laser', 'fireball.png');
     /////
@@ -67,28 +18,28 @@ class Water9 extends Phaser.Scene {
     // this.load.scenePlugin('WeaponPlugin', 'lib/WeaponPlugin.js', null, 'weapons');
   }
 
-shootLaser() {
+  shootLaser() {
     this.laserGroup.fireLaser(this.met.x, this.met.y - 20);
   }
 
   addEvents() {
-      // this.input.on('pointermove', (pointer) => {
-      //   this.met.x = pointer.x;
-      // });
+    // this.input.on('pointermove', (pointer) => {
+    //   this.met.x = pointer.x;
+    // });
 
-      this.input.on('pointerdown', pointer => {
-        this.shootLaser();
-      });
+    this.input.on('pointerdown', pointer => {
+      this.shootLaser();
+    });
 
-		this.inputKeys = [
-			this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
-			this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER),
-		];
-	}
+    this.inputKeys = [
+      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER),
+    ];
+  }
 
   create() {
     this.addEvents();
-    
+
     this.laserGroup = new LaserGroup(this);
     this.laserGroup.setDepth(1);
     const text = this.add.text(1600, 100, 'LIVES: ' + lives, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
@@ -174,36 +125,36 @@ shootLaser() {
     this.rectangle4 = this.add.rectangle(1100, 700, 500, 500, 0xFFFFF);
     this.rectangle4.setDepth(1);
     if (waterhouse) {
-    this.house = this.physics.add.sprite(
-      700,//x
-      900,//y
-      'house',//imagename
-    )
-    this.house.setScale(1, -1);
-    this.house.setDepth(1)
-    this.house.setScale(1) //resize
+      this.bluehouse = this.physics.add.sprite(
+        700,//x
+        900,//y
+        'bluehouse',//imagename
+      )
+      this.bluehouse.setScale(1, -1);
+      this.bluehouse.setDepth(1)
+      this.bluehouse.setScale(1) //resize
     }
 
     if (waterhouse2) {
-    this.house2 = this.physics.add.sprite(
-      1700,//x
-      900,//y
-      'house',//imagename
-    )
-    this.house2.setScale(1, -1);
-    this.house2.setDepth(1)
-    this.house2.setScale(1) //resize
+      this.bluehouse2 = this.physics.add.sprite(
+        1700,//x
+        900,//y
+        'bluehouse',//imagename
+      )
+      this.bluehouse2.setScale(1, -1);
+      this.bluehouse2.setDepth(1)
+      this.bluehouse2.setScale(1) //resize
     }
 
     if (waterhouse3) {
-    this.house3 = this.physics.add.sprite(
-      200,//x
-      900,//y
-      'house',//imagename
-    )
-    this.house3.setScale(1, -1);
-    this.house3.setDepth(1)
-    this.house3.setScale(1) //resize
+      this.bluehouse3 = this.physics.add.sprite(
+        200,//x
+        900,//y
+        'bluehouse',//imagename
+      )
+      this.bluehouse3.setScale(1, -1);
+      this.bluehouse3.setDepth(1)
+      this.bluehouse3.setScale(1) //resize
     }
 
 
@@ -235,14 +186,14 @@ shootLaser() {
       // this.rightKey.tint = 0xFFFFFF;
     }
 
-    this.physics.add.collider(this.met, this.house, togameover, null, this);
-    this.physics.add.collider(this.met, this.house2, togameover, null, this);
-    this.physics.add.collider(this.met, this.house3, togameover, null, this);
+    this.physics.add.collider(this.met, this.bluehouse, togameover, null, this);
+    this.physics.add.collider(this.met, this.bluehouse2, togameover, null, this);
+    this.physics.add.collider(this.met, this.bluehouse3, togameover, null, this);
 
 
-    this.physics.add.collider(this.laserGroup, this.house, tohit, null, this);
-    this.physics.add.collider(this.laserGroup, this.house2, tohit2, null, this);
-    this.physics.add.collider(this.laserGroup, this.house3, tohit3, null, this);
+    this.physics.add.collider(this.laserGroup, this.bluehouse, tohit, null, this);
+    this.physics.add.collider(this.laserGroup, this.bluehouse2, tohit2, null, this);
+    this.physics.add.collider(this.laserGroup, this.bluehouse3, tohit3, null, this);
     // this.physics.world.enable(this.rectangle);
     // this.physics.world.enable(this.rectangle2);
     // this.physics.world.enable(this.rectangle4);
@@ -271,31 +222,36 @@ shootLaser() {
       // Trigger the scene change here
       // For example:
       waterhouse = false;
-      this.house.destroy();
+      this.bluehouse.destroy();
       score += 100;
     }
     function tohit2() {
       // Trigger the scene change here
       // For example:
       waterhouse2 = false;
-      this.house2.destroy();
+      this.bluehouse2.destroy();
       score += 100;
     }
     function tohit3() {
       // Trigger the scene change here
       // For example:
       waterhouse3 = false;
-      this.house3.destroy();
+      this.bluehouse3.destroy();
       score += 100;
     }
 
-    this.met.setCollideWorldBounds(true);
+    //this.met.setCollideWorldBounds(true);
+
+    if (!this.physics.world.bounds.contains(this.met.x, this.met.y)) {
+      // Scene change logic
+      this.scene.start('level_select');
+    }
 
     // Listen for the worldbounds event
-    this.met.on('worldbounds', () => {
-      // Trigger the scene change here
-      this.scene.start('level_select');
-    });
+    // this.met.on('worldbounds', () => {
+    //   // Trigger the scene change here
+    //   this.scene.start('level_select');
+    // });
     // this.met.setCollideWorldBounds(true);
     // function update() {
     //   if (this.met.x < 0 || this.met.x > this.sys.canvas.width || this.met.y < 0 || this.met.y > this.sys.canvas.height) {
@@ -313,13 +269,14 @@ shootLaser() {
     //this.physics.world.wrap(this.met, this.met.width * SCALE / 2);
 
     this.inputKeys.forEach(key => {
-			// If key was just pressed down, shoot the laser. We use JustDown to make sure this only fires once.
-			if (Phaser.Input.Keyboard.JustDown(key)) {
-				this.shootLaser();
-			}
-		});
+      // If key was just pressed down, shoot the laser. We use JustDown to make sure this only fires once.
+      if (Phaser.Input.Keyboard.JustDown(key)) {
+        this.shootLaser();
+      }
+      // fireballcount--;
+    });
   }
-  
+
 
   //   // Horizontal movement
   //   if (this.cursors.left.isDown) {
