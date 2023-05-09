@@ -49,21 +49,21 @@ class Sat extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
 
 
-        const rectangle = this.add.rectangle(100, 500, 500, 100, 0xFF0000);
-        rectangle.setDepth(1);
-        rectangle.setStrokeStyle(4, 0x00FF00);
+        this.rectangle = this.add.rectangle(100, 500, 500, 100, 0xFF0000);
+        this.rectangle.setDepth(1);
+        this.rectangle.setStrokeStyle(4, 0x00FF00);
 
-        const rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0xFF0000); // x, y, width, height
-        rectangle2.setDepth(1);
-        rectangle2.setStrokeStyle(4, 0x00FF00);
+        this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0xFF0000); // x, y, width, height
+        this.rectangle2.setDepth(1);
+        this.rectangle2.setStrokeStyle(4, 0x00FF00);
 
-        const rectangle3 = this.add.rectangle(1700, 500, 1700, 100, 0xFF0000);
-        rectangle3.setDepth(1);
-        rectangle3.setStrokeStyle(4, 0x00FF00);
+        this.rectangle3 = this.add.rectangle(1700, 500, 1700, 100, 0xFF0000);
+        this.rectangle3.setDepth(1);
+        this.rectangle3.setStrokeStyle(4, 0x00FF00);
 
-        const rectangle4 = this.add.rectangle(700, 900, 500, 100, 0xFF0000);
-        rectangle4.setDepth(1);
-        rectangle4.setStrokeStyle(4, 0x00FF00);
+        this.rectangle4 = this.add.rectangle(700, 900, 500, 100, 0xFF0000);
+        this.rectangle4.setDepth(1);
+        this.rectangle4.setStrokeStyle(4, 0x00FF00);
 
         this.house = this.physics.add.sprite(
             800,//x
@@ -95,6 +95,15 @@ class Sat extends Phaser.Scene {
         this.physics.add.collider(this.met, this.house, togameover, null, this);
         this.physics.add.collider(this.met, this.house2, togameover, null, this);
         this.physics.add.collider(this.met, this.house3, togameover, null, this);
+
+        this.physics.add.existing(this.rectangle);
+        this.physics.add.existing(this.rectangle2);
+        this.physics.add.existing(this.rectangle3);
+        this.physics.add.existing(this.rectangle4);
+        this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
+        this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+        this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
+        this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
         // Collision callback function
         function togameover() {
             // Trigger the scene change here

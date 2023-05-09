@@ -16,6 +16,10 @@ const tileSize = 35;
 ///////////////
 let lives = 3;
 let firstwatervisit = true;
+let firstsatvisit = true;
+let firstcheesevisit = true;
+let firstbluevisit = true;
+let firstearthvisit = true;
 //this.lives.globalVar = 3;
 
 // main game object

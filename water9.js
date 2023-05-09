@@ -59,14 +59,14 @@ class Water9 extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     ///////
-    const rectangle = this.add.rectangle(300, 400, 500, 200, 0xFFFFF);
-    rectangle.setDepth(1);
+    this.rectangle = this.add.rectangle(300, 400, 500, 200, 0xFFFFF);
+    this.rectangle.setDepth(1);
 
-    const rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x1E90FF); // x, y, width, height
-    rectangle2.setDepth(1);
+    this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x1E90FF); // x, y, width, height
+    this.rectangle2.setDepth(1);
 
-    const rectangle4 = this.add.rectangle(1100, 700, 500, 500, 0xFFFFF);
-    rectangle4.setDepth(1);
+    this.rectangle4 = this.add.rectangle(1100, 700, 500, 500, 0xFFFFF);
+    this.rectangle4.setDepth(1);
 
     this.house = this.physics.add.sprite(
       700,//x
@@ -77,7 +77,7 @@ class Water9 extends Phaser.Scene {
     this.house.setDepth(1)
     this.house.setScale(1) //resize
 
-    this.house2 = this.add.image(
+    this.house2 = this.physics.add.sprite(
       1700,//x
       900,//y
       'house',//imagename
@@ -86,7 +86,7 @@ class Water9 extends Phaser.Scene {
     this.house2.setDepth(1)
     this.house2.setScale(1) //resize
 
-    this.house3 = this.add.image(
+    this.house3 = this.physics.add.sprite(
       200,//x
       900,//y
       'house',//imagename
@@ -124,6 +124,18 @@ class Water9 extends Phaser.Scene {
     }
 
     this.physics.add.collider(this.met, this.house, togameover, null, this);
+    this.physics.add.collider(this.met, this.house2, togameover, null, this);
+    this.physics.add.collider(this.met, this.house3, togameover, null, this);
+    // this.physics.world.enable(this.rectangle);
+    // this.physics.world.enable(this.rectangle2);
+    // this.physics.world.enable(this.rectangle4);
+    
+    this.physics.add.existing(this.rectangle);
+    this.physics.add.existing(this.rectangle2);
+    this.physics.add.existing(this.rectangle4);
+    this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
+    this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+    this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
     // Collision callback function
     function togameover() {
       // Trigger the scene change here

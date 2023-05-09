@@ -12,6 +12,7 @@ class Level_select extends Phaser.Scene {
         this.load.image('earth', 'earth.png');
         this.load.image('water', 'water9.png');
         this.load.image('met', 'meteor.png');
+        this.load.image('ball', 'fireball.png');
     }
 
     create() {
@@ -30,6 +31,40 @@ class Level_select extends Phaser.Scene {
 
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
+        /////////////////////////////////
+        // this.createMultiple({
+        //     frameQuantity: 5,
+        //     key: 'ball',
+        //     active: false,
+        //     visible: false,
+        //     classType: ball
+        // });
+
+        // fire (x, y) {
+        //     this.body.reset(x, y);
+        //     this.setActive(true);
+        //     this.setVisible(true);
+        //     this.setVelocityY(-300);
+        // }
+
+        // fireBullet(x, y){
+        //     const ball = this.getFirstDead(false);
+        //     if (ball) {
+        //         ball.fire(x, y);
+        //     }
+        // }
+
+        // this.ball = new Bullets(this);
+        // this.input.on('pointermove', (pointer) =>
+        // {
+        //     this.met.x = pointer.x;
+        // });
+
+        // this.input.on('pointerdown', (pointer) =>
+        // {
+        //     this.bullets.fireBullet(this.met.x, this.met.y);
+        // });
+        ///////////////////////
 
         this.blue = this.physics.add.sprite(
             400,//x
