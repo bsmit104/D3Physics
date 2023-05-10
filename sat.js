@@ -10,6 +10,14 @@ class Sat extends Phaser.Scene {
         this.load.image('laser', 'fireball.png');
     }
 
+    // handleCollision() {
+    //     // Handle the collision between the laser and the rectangle
+    //     // For example, you can destroy the laser and perform other actions
+    
+    //     this.laser.setActive(false);
+    //     this.laser.setVisible(false);
+    //   }
+
     shootLaser() {
         this.laserGroup.fireLaser(this.met.x, this.met.y - 20);
     }
@@ -129,31 +137,31 @@ class Sat extends Phaser.Scene {
             this.redhouse3.setScale(1) //resize
         }
 
-        this.physics.add.collider(this.met, this.redhouse, togameover, null, this);
-        this.physics.add.collider(this.met, this.redhouse2, togameover, null, this);
-        this.physics.add.collider(this.met, this.redhouse3, togameover, null, this);
+        // this.physics.add.collider(this.met, this.redhouse, togameover, null, this);
+        // this.physics.add.collider(this.met, this.redhouse2, togameover, null, this);
+        // this.physics.add.collider(this.met, this.redhouse3, togameover, null, this);
 
-        this.physics.add.existing(this.rectangle);
-        this.physics.add.existing(this.rectangle2);
-        this.physics.add.existing(this.rectangle3);
-        this.physics.add.existing(this.rectangle4);
-        this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
-        this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
-        this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
-        this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
-        // Collision callback function
-        function togameover() {
-            // Trigger the scene change here
-            // For example:
-            if (lives == 1) {
-                this.scene.start('gameover');
-                lives = 3;
-            }
-            else {
-                lives--;
-                this.scene.start('sat');
-            }
-        }
+        // this.physics.add.existing(this.rectangle);
+        // this.physics.add.existing(this.rectangle2);
+        // this.physics.add.existing(this.rectangle3);
+        // this.physics.add.existing(this.rectangle4);
+        // this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
+        // this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+        // this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
+        // this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
+        // // Collision callback function
+        // function togameover() {
+        //     // Trigger the scene change here
+        //     // For example:
+        //     if (lives == 1) {
+        //         this.scene.start('gameover');
+        //         lives = 3;
+        //     }
+        //     else {
+        //         lives--;
+        //         this.scene.start('sat');
+        //     }
+        // }
 
         const space = this.add.image(200, 0, 'space');
         space.setOrigin(0);
@@ -193,6 +201,7 @@ class Sat extends Phaser.Scene {
 
         this.physics.add.existing(this.rectangle);
         this.physics.add.existing(this.rectangle2);
+        this.physics.add.existing(this.rectangle3);
         this.physics.add.existing(this.rectangle4);
         this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
         this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
@@ -203,6 +212,19 @@ class Sat extends Phaser.Scene {
         // this.physics.add.collider(this.laserGroup, this.rectangle2, toexpl, null, this);
         // this.physics.add.collider(this.laserGroup, this.rectangle3, toexpl, null, this);
         // this.physics.add.collider(this.laserGroup, this.rectangle4, toexpl, null, this);
+        this.physics.add.overlap(this.laserGroup, this.rectangle, toexpl, null, this);
+        this.physics.add.overlap(this.laserGroup, this.rectangle2, toexpl, null, this);
+        this.physics.add.overlap(this.laserGroup, this.rectangle3, toexpl, null, this);
+        this.physics.add.overlap(this.laserGroup, this.rectangle4, toexpl, null, this);
+
+        // function handleCollision() {
+        //     // Handle the collision between the laser and the rectangle
+        //     // For example, you can destroy the laser and perform other actions
+            
+        //     this.laserGroup.setActive(false);
+        //     this.laserGroup.setVisible(false);
+        //     // this.laserGroup.destroy();
+        //   }
         // Collision callback function
         function togameover() {
             // Trigger the scene change here
@@ -213,15 +235,46 @@ class Sat extends Phaser.Scene {
             }
             else {
                 lives--;
-                this.scene.start('water9');
+                this.scene.start('sat');
             }
         }
 
-        // function toexpl() {
-        //     // Trigger the scene change here
-        //     // For example:
-        //     this.laserGroup.enable = false;
-        // }
+        // this.rectangle.body.bounce.set(0);
+        // this.rectangle2.body.bounce.set(0);
+        // this.rectangle3.body.bounce.set(0);
+        // this.rectangle4.body.bounce.set(0);
+
+        // this.physics.add.overlap(this.laserGroup, this.rectangle, function (overlappingEnemy, laserGroup) {
+        //     const { x, y } = bullet.body.center;
+        
+        //     enemy.state -= 1;
+        //     bullet.disableBody(true, true);
+        //     bulletPlasma.setSpeedY(0.2 * bullet.body.velocity.y).emitParticleAt(x, y);
+        
+        //     if (enemy.state <= 0) {
+        //       enemy.setFrame(3);
+        //       enemy.body.checkCollision.none = true;
+        //       enemyFiring.remove();
+        //       enemyMoving.stop();
+        //     }
+        //   });
+
+        function toexpl() {
+            boom = true;
+            this.laserGroup.laserhit(boom);
+            // this.Laser.setActive(false);
+            // this.Laser.setVisible(false);
+            //this.Laser.hit(boom);
+            // Trigger the scene change here
+            // For example:
+            //console.log(laserGroup);
+            // this.laser.destroy();
+            // this.laserGroup.disableBody(true, true);
+            //this.laserGroup.enable = true;
+            // this.laserGroup.setActive(false);
+            // this.laserGroup.setVisible(false);
+            //this.laserGroup.enable = false;
+        }
 
         function tohit() {
             // Trigger the scene change here

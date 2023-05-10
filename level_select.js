@@ -12,6 +12,7 @@ class LaserGroup extends Phaser.Physics.Arcade.Group {
             visible: false,
             key: 'laser'
         })
+        //checkCollision.none = true;
         // for (let i of this.getChildren()) i.body.enable = false;
     }
 
@@ -20,9 +21,19 @@ class LaserGroup extends Phaser.Physics.Arcade.Group {
         const laser = this.getFirstDead(false);
         if (laser) {
             laser.fire(x, y);
+            //checkCollision.none = false;
+            // this.physics.add.collider(laser, this.rectangle, handleCollision, null, this);
         }
         // this.body.enable = true;
     }
+/////////////fix me//////////////////
+    laserhit(x) {
+        const laser = this.getFirstDead(false);
+        if (laser) {
+            laser.hit(x);
+        }
+    }
+    ////////////////////////////////////
 
 }
 
@@ -38,6 +49,7 @@ class Laser extends Phaser.Physics.Arcade.Sprite {
         this.setVisible(true);
 
         this.setVelocityY(900);
+        boom = true;
     }
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
@@ -47,6 +59,15 @@ class Laser extends Phaser.Physics.Arcade.Sprite {
             this.setVisible(false);
         }
     }
+    ///////////////fix me//////////////////
+    hit(x) {
+        if (x) {
+            this.setActive(false);
+            this.setVisible(false);
+            //this.destroy();
+        }
+    }
+    /////////////////////////////////////
 }
 class Level_select extends Phaser.Scene {
     constructor() {
@@ -65,6 +86,11 @@ class Level_select extends Phaser.Scene {
     }
 
     create() {
+        firstwatervisit = true;
+        firstsatvisit = true;
+        firstcheesevisit = true;
+        firstbluevisit = true;
+        firstearthvisit = true;
         const text = this.add.text(1600, 100, 'LIVES: ' + lives, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
         text.setDepth(1);
         const text2 = this.add.text(1600, 150, 'SCORE: ' + score, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });

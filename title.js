@@ -44,7 +44,7 @@ class Title extends Phaser.Scene {
             //this.title.setDepth(1)
             this.titleob.setDepth(1);
             this.titleob.setScale(1) //resize
-            const instructions = this.add.text(200, 500, "HOW TO PLAY:\nSmash spaceships with your bod\nPress z to shoot fireballs at alien houses\nDon’t get hit by lasers!", { fontSize: '40px', fill: '#ff0' });
+            const instructions = this.add.text(200, 500, "HOW TO PLAY:\nSmash spaceships with your bod.\n'Right'/'Left' arrows rotate.\n'up' arrow is forward.\nPress 'space' to shoot fireballs.\nat alien buildings\nDon’t get hit by lasers or crash!", { fontSize: '40px', fill: '#ff0' });
             instructions.setDepth(1);
             //this.add.text(50,50, "Adventure awaits!").setFontSize(50);
         //this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);

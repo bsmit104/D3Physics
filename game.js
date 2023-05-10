@@ -18,6 +18,7 @@ const tileSize = 35;
 let lives = 3;
 let score = 0;
 let fireballcount = 30;
+let boom = false;
 /////////house spawn///////////////
 let waterhouse = true;
 let waterhouse2 = true;

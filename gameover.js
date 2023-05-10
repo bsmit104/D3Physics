@@ -4,6 +4,25 @@ class Gameover extends Phaser.Scene {
         super('gameover');
     }
     create() {
+    /////////house spawn///////////////
+    waterhouse = true;
+    waterhouse2 = true;
+    waterhouse3 = true;
+    sathouse = true;
+    sathouse2 = true;
+    sathouse3 = true; 
+    cheesehouse = true;
+    cheesehouse2 = true;
+    cheesehouse3 = true; 
+    bluehouse = true;
+    bluehouse2 = true;
+    bluehouse3 = true;
+    earthhouse = true;
+    earthhouse2 = true;
+    earthhouse3 = true;
+    score = 0;
+    lives = 3;
+
     this.cameras.main.setBackgroundColor('#FF0000');
 
     this.textObject0 = this.add.text(
