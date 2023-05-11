@@ -1,4 +1,6 @@
 # D3Physics  
+GAME SATISFIES REQUREMENTS, SHOOTING DOES NOT CURRENTLY COLLIDE WITH OBSTACLES, FLIES THROUGH,  
+I WILL ALSO ADD ENEMY SHIPS, REQUIREMENTS ARE MET THO
   
 ## PROTOTYPE  
 https://docs.google.com/presentation/d/1opeTQ_UDd1pT6JNuLcInDx1xT_D0G2mRhegaeEswd4g/edit?usp=sharing  
@@ -6,7 +8,7 @@ https://docs.google.com/presentation/d/1opeTQ_UDd1pT6JNuLcInDx1xT_D0G2mRhegaeEsw
 ## LINK TO PLAY
 
 ## DESCRIPTION  
-All assets were created using Pixilart.com. I took inspiration for the game mechanics from Gravitar the Atari arcade game. The requirement of scene to contextualize gameplay and separate scene is satisfied in the mini level selection in the actual game play. Players will have a choice to fly to a planet to trigger one of the mini games that make up the whole game. This concept was confirmed to meet the requirement in class. Each of the mini games include gravity physics where the player will fall if not flying.
+All assets were created using Pixilart.com. I took inspiration for the game mechanics from Gravitar the Atari arcade game. The requirement of scene to contextualize gameplay and separate scene is satisfied in the mini level selection in the actual game play. Players will have a choice to fly to a planet to trigger one of the mini games that make up the whole game. This concept was confirmed to meet the requirement in class. Each of the mini games include gravity physics where the player will fall if not flying. There are x and y inputs for continuouse inputs and players use space bar, left, right, and up arrows for discrete inputs. Player will die after 3 collisions. Houses destroy upon being hit with fire balls.
   
 ## Process requirements:  
 Your GitHub repository must show a history of incremental commits with useful commit messages, tracing back to an empty repository at the start.  

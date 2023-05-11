@@ -34,26 +34,28 @@ class Cheese extends Phaser.Scene {
 
     this.laserGroup = new LaserGroup(this);
     this.laserGroup.setDepth(1);
+
+    ////////////////stats////////////////////////
     const text = this.add.text(1600, 100, 'LIVES: ' + lives, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
     text.setDepth(1);
     const text2 = this.add.text(1600, 150, 'SCORE: ' + score, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
     text2.setDepth(1);
     const text3 = this.add.text(1600, 50, 'FIREBALLS: ' + fireballcount, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
     text3.setDepth(1);
-    // this.player = new Player(this, 400, 300);
-    // this.cursors = this.input.keyboard.createCursorKeys();
+
     // define variables
     this.ANG_VELOCITY = 180;    // degrees/second
     this.MAX_VELOCITY = 500;    // pixels/second
     this.DRAG = 0.99;
 
-    //this.met = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, 'met').setScale(SCALE);
+    ////////////met spawn////////////////////
     this.met = this.physics.add.sprite(1000, 100, 'met').setScale(SCALE);
     this.met.setDepth(1);
     this.met.setMaxVelocity(this.MAX_VELOCITY);
     this.met.setDamping(true);
     this.met.setDrag(this.DRAG);
 
+    //////////////////respawn/////////////////////
     if (!firstcheesevisit) {
       // Define the duration and number of flashes
       const duration = 2000; // Duration in milliseconds
@@ -79,6 +81,7 @@ class Cheese extends Phaser.Scene {
     // set up Phaser-provided cursor key input
     cursors = this.input.keyboard.createCursorKeys();
 
+    /////////////////rectangle spawn////////////////////
     this.rectangle = this.add.rectangle(400, 300, 200, 150, 0xFF8C00);
     this.rectangle.setDepth(1);
     this.rectangle.setStrokeStyle(4, 0x00FF00);
@@ -107,6 +110,7 @@ class Cheese extends Phaser.Scene {
     this.rectangle5.setOrigin(0.5);
     //this.rectangle5.setAngle(45);
 
+    //////////////////////house spawn/////////////////////
     if (cheesehouse) {
       this.phouse = this.physics.add.sprite(
         900,//x
@@ -150,6 +154,8 @@ class Cheese extends Phaser.Scene {
     // text.setDepth(1);
     // physics methods adapted from the Phaser 3 Asteroids Example 👍
     // handle input
+
+    ///////////////////movement///////////////////////
     if (cursors.up.isDown) {
       this.physics.velocityFromRotation(this.met.rotation - Math.PI / 2 * 3, 200, this.met.body.acceleration);
       // this.upKey.tint = 0xFACADE;     // tint keyboard key
@@ -170,6 +176,7 @@ class Cheese extends Phaser.Scene {
       // this.rightKey.tint = 0xFFFFFF;
     }
 
+    ////////////////collisions/////////////////////
     this.physics.add.collider(this.met, this.phouse, togameover, null, this);
     this.physics.add.collider(this.met, this.phouse2, togameover, null, this);
     this.physics.add.collider(this.met, this.phouse3, togameover, null, this);
@@ -203,54 +210,30 @@ class Cheese extends Phaser.Scene {
       }
     }
 
+    ///////////////destroy houses////////////////
     function tohit() {
-      // Trigger the scene change here
-      // For example:
       cheesehouse = false;
       this.phouse.destroy();
       score += 100;
     }
     function tohit2() {
-      // Trigger the scene change here
-      // For example:
       cheesehouse2 = false;
       this.phouse2.destroy();
       score += 100;
     }
     function tohit3() {
-      // Trigger the scene change here
-      // For example:
       cheesehouse3 = false;
       this.phouse3.destroy();
       score += 100;
     }
 
+    ////////////////////to menu/////////////////////
     if (!this.physics.world.bounds.contains(this.met.x, this.met.y)) {
       // Scene change logic
       this.scene.start('level_select');
     }
-    // this.met.setCollideWorldBounds(true);
 
-    // // Listen for the worldbounds event
-    // this.met.on('worldbounds', () => {
-    //   // Trigger the scene change here
-    //   this.scene.start('level_select');
-    // });
-    // this.met.setCollideWorldBounds(true);
-    // function update() {
-    //   if (this.met.x < 0 || this.met.x > this.sys.canvas.width || this.met.y < 0 || this.met.y > this.sys.canvas.height) {
-    //     // Trigger the scene change here
-    //     this.scene.start('level_select');
-    //   }
-    // }
-    //this.met.setCollideWorldBounds(true);
-    // this.met.on('worldbounds', () => {
-    //   // Trigger the scene change here
-    //   // For example:
-    //   this.scene.start('level_select');
-    // });
-    // wrap physics object(s) .wrap(gameObject, padding)
-    //this.physics.world.wrap(this.met, this.met.width * SCALE / 2);
+    //////////////shooot///////////////////
     this.inputKeys.forEach(key => {
       // If key was just pressed down, shoot the laser. We use JustDown to make sure this only fires once.
       if (Phaser.Input.Keyboard.JustDown(key)) {

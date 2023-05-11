@@ -42,26 +42,30 @@ class Sat extends Phaser.Scene {
 
         this.laserGroup = new LaserGroup(this);
         this.laserGroup.setDepth(1);
+
+        ///////////////stats/////////////////////
         const text = this.add.text(1600, 100, 'LIVES: ' + lives, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
         text.setDepth(1);
         const text2 = this.add.text(1600, 150, 'SCORE: ' + score, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
         text2.setDepth(1);
         const text3 = this.add.text(1600, 50, 'FIREBALLS: ' + fireballcount, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
         text3.setDepth(1);
-        // this.player = new Player(this, 400, 300);
-        // this.cursors = this.input.keyboard.createCursorKeys();
+        
+
         // define variables
         this.ANG_VELOCITY = 180;    // degrees/second
         this.MAX_VELOCITY = 500;    // pixels/second
         this.DRAG = 0.99;
 
-        //this.met = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, 'met').setScale(SCALE);
+
+        ////////////////meteor spawn/////////////////////////
         this.met = this.physics.add.sprite(1000, 100, 'met').setScale(SCALE);
         this.met.setDepth(1);
         this.met.setMaxVelocity(this.MAX_VELOCITY);
         this.met.setDamping(true);
         this.met.setDrag(this.DRAG);
 
+        /////////////////respawn////////////////////
         if (!firstsatvisit) {
             // Define the duration and number of flashes
             const duration = 2000; // Duration in milliseconds
@@ -87,7 +91,7 @@ class Sat extends Phaser.Scene {
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
 
-
+        //////////////rectangle spawn///////////////////
         this.rectangle = this.add.rectangle(100, 500, 500, 100, 0xFF0000);
         this.rectangle.setDepth(1);
         this.rectangle.setStrokeStyle(4, 0x00FF00);
@@ -104,6 +108,7 @@ class Sat extends Phaser.Scene {
         this.rectangle4.setDepth(1);
         this.rectangle4.setStrokeStyle(4, 0x00FF00);
 
+        ///////////////house spawn//////////////////
         if (sathouse) {
             this.redhouse = this.physics.add.sprite(
                 800,//x
@@ -137,32 +142,6 @@ class Sat extends Phaser.Scene {
             this.redhouse3.setScale(1) //resize
         }
 
-        // this.physics.add.collider(this.met, this.redhouse, togameover, null, this);
-        // this.physics.add.collider(this.met, this.redhouse2, togameover, null, this);
-        // this.physics.add.collider(this.met, this.redhouse3, togameover, null, this);
-
-        // this.physics.add.existing(this.rectangle);
-        // this.physics.add.existing(this.rectangle2);
-        // this.physics.add.existing(this.rectangle3);
-        // this.physics.add.existing(this.rectangle4);
-        // this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
-        // this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
-        // this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
-        // this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
-        // // Collision callback function
-        // function togameover() {
-        //     // Trigger the scene change here
-        //     // For example:
-        //     if (lives == 1) {
-        //         this.scene.start('gameover');
-        //         lives = 3;
-        //     }
-        //     else {
-        //         lives--;
-        //         this.scene.start('sat');
-        //     }
-        // }
-
         const space = this.add.image(200, 0, 'space');
         space.setOrigin(0);
         space.setDepth(0);
@@ -171,6 +150,12 @@ class Sat extends Phaser.Scene {
     update() {
         // physics methods adapted from the Phaser 3 Asteroids Example 👍
         // handle input
+        // this.input.keyboard.on('keydown-SPACE', function () {
+        //     fireballcount--;
+        //     console.log('Fireball count:', fireballcount);
+        //   });
+
+        /////////////////movement////////////////////
         if (cursors.up.isDown) {
             this.physics.velocityFromRotation(this.met.rotation - Math.PI / 2 * 3, 200, this.met.body.acceleration);
             // this.upKey.tint = 0xFACADE;     // tint keyboard key
@@ -191,6 +176,7 @@ class Sat extends Phaser.Scene {
             // this.rightKey.tint = 0xFFFFFF;
         }
 
+        ////////////////collision detection////////////////////
         this.physics.add.collider(this.laserGroup, this.redhouse, tohit, null, this);
         this.physics.add.collider(this.laserGroup, this.redhouse2, tohit2, null, this);
         this.physics.add.collider(this.laserGroup, this.redhouse3, tohit3, null, this);
@@ -217,15 +203,7 @@ class Sat extends Phaser.Scene {
         this.physics.add.overlap(this.laserGroup, this.rectangle3, toexpl, null, this);
         this.physics.add.overlap(this.laserGroup, this.rectangle4, toexpl, null, this);
 
-        // function handleCollision() {
-        //     // Handle the collision between the laser and the rectangle
-        //     // For example, you can destroy the laser and perform other actions
-            
-        //     this.laserGroup.setActive(false);
-        //     this.laserGroup.setVisible(false);
-        //     // this.laserGroup.destroy();
-        //   }
-        // Collision callback function
+        //////////////game over after 3 lives/////////////
         function togameover() {
             // Trigger the scene change here
             // For example:
@@ -259,6 +237,7 @@ class Sat extends Phaser.Scene {
         //     }
         //   });
 
+        //////////////trying to do collision for rectangle and fireball/////////////////////////
         function toexpl() {
             boom = true;
             this.laserGroup.laserhit(boom);
@@ -276,23 +255,18 @@ class Sat extends Phaser.Scene {
             //this.laserGroup.enable = false;
         }
 
+        ////////////destroy houses when hit//////////////////
         function tohit() {
-            // Trigger the scene change here
-            // For example:
             sathouse = false;
             this.redhouse.destroy();
             score += 100;
         }
         function tohit2() {
-            // Trigger the scene change here
-            // For example:
             sathouse2 = false;
             this.redhouse2.destroy();
             score += 100;
         }
         function tohit3() {
-            // Trigger the scene change here
-            // For example:
             sathouse3 = false;
             this.redhouse3.destroy();
             score += 100;
@@ -303,28 +277,7 @@ class Sat extends Phaser.Scene {
             this.scene.start('level_select');
         }
 
-        // this.met.setCollideWorldBounds(true);
-
-        // // Listen for the worldbounds event
-        // this.met.on('worldbounds', () => {
-        //     // Trigger the scene change here
-        //     this.scene.start('level_select');
-        // });
-        // this.met.setCollideWorldBounds(true);
-        // function update() {
-        //   if (this.met.x < 0 || this.met.x > this.sys.canvas.width || this.met.y < 0 || this.met.y > this.sys.canvas.height) {
-        //     // Trigger the scene change here
-        //     this.scene.start('level_select');
-        //   }
-        // }
-        //this.met.setCollideWorldBounds(true);
-        // this.met.on('worldbounds', () => {
-        //   // Trigger the scene change here
-        //   // For example:
-        //   this.scene.start('level_select');
-        // });
-        // wrap physics object(s) .wrap(gameObject, padding)
-        //this.physics.world.wrap(this.met, this.met.width * SCALE / 2);
+        //////////////////shoot////////////////////
         this.inputKeys.forEach(key => {
             // If key was just pressed down, shoot the laser. We use JustDown to make sure this only fires once.
             if (Phaser.Input.Keyboard.JustDown(key)) {

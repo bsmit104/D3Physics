@@ -34,6 +34,8 @@ class Earth extends Phaser.Scene {
 
     this.laserGroup = new LaserGroup(this);
     this.laserGroup.setDepth(1);
+
+    /////////////////////stats//////////////////
     const text = this.add.text(1600, 100, 'LIVES: ' + lives, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
     text.setDepth(1);
     const text2 = this.add.text(1600, 150, 'SCORE: ' + score, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
@@ -47,13 +49,14 @@ class Earth extends Phaser.Scene {
     this.MAX_VELOCITY = 500;    // pixels/second
     this.DRAG = 0.99;
 
-    //this.met = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, 'met').setScale(SCALE);
+    /////////////////meteor spawn//////////////////////
     this.met = this.physics.add.sprite(1000, 100, 'met').setScale(SCALE);
     this.met.setDepth(1);
     this.met.setMaxVelocity(this.MAX_VELOCITY);
     this.met.setDamping(true);
     this.met.setDrag(this.DRAG);
 
+    //////////////respawn///////////////
     if (!firstearthvisit) {
       // Define the duration and number of flashes
       const duration = 2000; // Duration in milliseconds
@@ -79,12 +82,14 @@ class Earth extends Phaser.Scene {
     // set up Phaser-provided cursor key input
     cursors = this.input.keyboard.createCursorKeys();
 
+    ////////////spawn rectangles//////////////////
     this.rectangle = this.add.rectangle(950, 500, 1200, 50, 0xFFFFFF);
     this.rectangle.setDepth(1);
 
     this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x8A9A5B); // x, y, width, height
     this.rectangle2.setDepth(1);
 
+    //////////////spawn houses///////////////////
     if (earthhouse) {
       this.ehouse = this.physics.add.sprite(
         700,//x
@@ -126,6 +131,8 @@ class Earth extends Phaser.Scene {
   update() {
     // physics methods adapted from the Phaser 3 Asteroids Example 👍
     // handle input
+
+    ////////////////movement///////////////////
     if (cursors.up.isDown) {
       this.physics.velocityFromRotation(this.met.rotation - Math.PI / 2 * 3, 200, this.met.body.acceleration);
       // this.upKey.tint = 0xFACADE;     // tint keyboard key
@@ -146,6 +153,7 @@ class Earth extends Phaser.Scene {
       // this.rightKey.tint = 0xFFFFFF;
     }
 
+    /////////////////collisions///////////////
     this.physics.add.collider(this.met, this.ehouse, togameover, null, this);
     this.physics.add.collider(this.met, this.ehouse2, togameover, null, this);
     this.physics.add.collider(this.met, this.ehouse3, togameover, null, this);
@@ -159,10 +167,8 @@ class Earth extends Phaser.Scene {
     this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
     this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
 
-    // Collision callback function
+    /////////////game over////////////////
     function togameover() {
-      // Trigger the scene change here
-      // For example:
       if (lives == 1) {
         this.scene.start('gameover');
         lives = 3;
@@ -172,55 +178,30 @@ class Earth extends Phaser.Scene {
         this.scene.start('earth');
       }
     }
+
+    ////////////////destroy houses///////////////
     function tohit() {
-      // Trigger the scene change here
-      // For example:
       earthhouse = false;
       this.ehouse.destroy();
       score += 100;
     }
     function tohit2() {
-      // Trigger the scene change here
-      // For example:
       earthhouse2 = false;
       this.ehouse2.destroy();
       score += 100;
     }
     function tohit3() {
-      // Trigger the scene change here
-      // For example:
       earthhouse3 = false;
       this.ehouse3.destroy();
       score += 100;
     }
 
+    ///////////to main menu///////////////
     if (!this.physics.world.bounds.contains(this.met.x, this.met.y)) {
-      // Scene change logic
       this.scene.start('level_select');
     }
 
-    // this.met.setCollideWorldBounds(true);
-
-    // // Listen for the worldbounds event
-    // this.met.on('worldbounds', () => {
-    //   // Trigger the scene change here
-    //   this.scene.start('level_select');
-    // });
-    // this.met.setCollideWorldBounds(true);
-    // function update() {
-    //   if (this.met.x < 0 || this.met.x > this.sys.canvas.width || this.met.y < 0 || this.met.y > this.sys.canvas.height) {
-    //     // Trigger the scene change here
-    //     this.scene.start('level_select');
-    //   }
-    // }
-    //this.met.setCollideWorldBounds(true);
-    // this.met.on('worldbounds', () => {
-    //   // Trigger the scene change here
-    //   // For example:
-    //   this.scene.start('level_select');
-    // });
-    // wrap physics object(s) .wrap(gameObject, padding)
-    //this.physics.world.wrap(this.met, this.met.width * SCALE / 2);
+    ///////////////////shoot///////////////
     this.inputKeys.forEach(key => {
       // If key was just pressed down, shoot the laser. We use JustDown to make sure this only fires once.
       if (Phaser.Input.Keyboard.JustDown(key)) {

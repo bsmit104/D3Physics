@@ -9,13 +9,6 @@ class Water9 extends Phaser.Scene {
     this.load.image('bluehouse', 'bluetower.png');
     this.load.image('met', 'meteor.png');
     this.load.image('laser', 'fireball.png');
-    /////
-    // this.load.image('met', 'meteor.png');
-    // this.load.image('fireball', 'fireball.png');
-    // this.load.image('yellowBall', 'yellowBall.png');
-    // this.load.image('redBall', 'redBall.png');
-    // this.load.atlas('particles', 'particles.png', 'particles.json');
-    // this.load.scenePlugin('WeaponPlugin', 'lib/WeaponPlugin.js', null, 'weapons');
   }
 
   shootLaser() {
@@ -42,6 +35,8 @@ class Water9 extends Phaser.Scene {
 
     this.laserGroup = new LaserGroup(this);
     this.laserGroup.setDepth(1);
+
+    ////////////////////stats////////////////////////
     const text = this.add.text(1600, 100, 'LIVES: ' + lives, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
     text.setDepth(1);
     const text2 = this.add.text(1600, 150, 'SCORE: ' + score, { fontFamily: 'Arial', fontSize: 40, color: '#ffffff' });
@@ -55,13 +50,14 @@ class Water9 extends Phaser.Scene {
     this.MAX_VELOCITY = 500;    // pixels/second
     this.DRAG = 0.99;
 
-    //this.met = this.physics.add.sprite(game.config.width / 2, game.config.height / 2, 'met').setScale(SCALE);
+    ////////////////met spawn////////////////////
     this.met = this.physics.add.sprite(1000, 100, 'met').setScale(SCALE);
     this.met.setDepth(1);
     this.met.setMaxVelocity(this.MAX_VELOCITY);
     this.met.setDamping(true);
     this.met.setDrag(this.DRAG);
 
+    ////////////spawn//////////////////
     if (!firstwatervisit) {
       // Define the duration and number of flashes
       const duration = 2000; // Duration in milliseconds
@@ -87,35 +83,7 @@ class Water9 extends Phaser.Scene {
     // set up Phaser-provided cursor key input
     cursors = this.input.keyboard.createCursorKeys();
 
-    ///////
-    // this.bullets = new Bullets(this);
-
-    // this.input.on('pointermove', (pointer) => {
-
-    //   this.met.x = pointer.x;
-
-    // });
-
-    // this.input.on('pointerdown', (pointer) => {
-
-    //   this.bullets.fireBullet(this.met.x, this.met.y);
-
-    // });
-    // Create a group for the fireballs
-    // const fireballsGroup = this.physics.add.group();
-
-    // // Function to handle shooting fireballs
-    // function shootFireball() {
-    //   const fireball = fireballsGroup.create(met.x, met.y, 'fireball');
-    //   fireball.setVelocity(0, -200);
-    // }
-
-    // // Listen for the spacebar key press event
-    // const spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-    // this.input.keyboard.on('keydown_SPACE', function () {
-    //   shootFireball();
-    // });
-    /////////////
+    //////////////rectangle spawn//////////////////////
     this.rectangle = this.add.rectangle(300, 400, 500, 200, 0xFFFFF);
     this.rectangle.setDepth(1);
 
@@ -124,6 +92,8 @@ class Water9 extends Phaser.Scene {
 
     this.rectangle4 = this.add.rectangle(1100, 700, 500, 500, 0xFFFFF);
     this.rectangle4.setDepth(1);
+
+    /////////////////house spawn/////////////////////
     if (waterhouse) {
       this.bluehouse = this.physics.add.sprite(
         700,//x
@@ -166,6 +136,8 @@ class Water9 extends Phaser.Scene {
   update() {
     // physics methods adapted from the Phaser 3 Asteroids Example 👍
     // handle input
+
+    ////////////movement/////////////////
     if (cursors.up.isDown) {
       this.physics.velocityFromRotation(this.met.rotation - Math.PI / 2 * 3, 200, this.met.body.acceleration);
       // this.upKey.tint = 0xFACADE;     // tint keyboard key
@@ -186,17 +158,14 @@ class Water9 extends Phaser.Scene {
       // this.rightKey.tint = 0xFFFFFF;
     }
 
+    ////////////collisions//////////////
     this.physics.add.collider(this.met, this.bluehouse, togameover, null, this);
     this.physics.add.collider(this.met, this.bluehouse2, togameover, null, this);
     this.physics.add.collider(this.met, this.bluehouse3, togameover, null, this);
 
-
     this.physics.add.collider(this.laserGroup, this.bluehouse, tohit, null, this);
     this.physics.add.collider(this.laserGroup, this.bluehouse2, tohit2, null, this);
     this.physics.add.collider(this.laserGroup, this.bluehouse3, tohit3, null, this);
-    // this.physics.world.enable(this.rectangle);
-    // this.physics.world.enable(this.rectangle2);
-    // this.physics.world.enable(this.rectangle4);
 
     this.physics.add.existing(this.rectangle);
     this.physics.add.existing(this.rectangle2);
@@ -205,9 +174,9 @@ class Water9 extends Phaser.Scene {
     this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
     this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
     // Collision callback function
+
+    /////////game over///////////////
     function togameover() {
-      // Trigger the scene change here
-      // For example:
       if (lives == 1) {
         this.scene.start('gameover');
         lives = 3;
@@ -218,56 +187,30 @@ class Water9 extends Phaser.Scene {
       }
     }
 
+    //////////////destroy houses/////////////////
     function tohit() {
-      // Trigger the scene change here
-      // For example:
       waterhouse = false;
       this.bluehouse.destroy();
       score += 100;
     }
     function tohit2() {
-      // Trigger the scene change here
-      // For example:
       waterhouse2 = false;
       this.bluehouse2.destroy();
       score += 100;
     }
     function tohit3() {
-      // Trigger the scene change here
-      // For example:
       waterhouse3 = false;
       this.bluehouse3.destroy();
       score += 100;
     }
 
-    //this.met.setCollideWorldBounds(true);
-
+    ///////////////fly to main menu////////////////
     if (!this.physics.world.bounds.contains(this.met.x, this.met.y)) {
       // Scene change logic
       this.scene.start('level_select');
     }
 
-    // Listen for the worldbounds event
-    // this.met.on('worldbounds', () => {
-    //   // Trigger the scene change here
-    //   this.scene.start('level_select');
-    // });
-    // this.met.setCollideWorldBounds(true);
-    // function update() {
-    //   if (this.met.x < 0 || this.met.x > this.sys.canvas.width || this.met.y < 0 || this.met.y > this.sys.canvas.height) {
-    //     // Trigger the scene change here
-    //     this.scene.start('level_select');
-    //   }
-    // }
-    //this.met.setCollideWorldBounds(true);
-    // this.met.on('worldbounds', () => {
-    //   // Trigger the scene change here
-    //   // For example:
-    //   this.scene.start('level_select');
-    // });
-    // wrap physics object(s) .wrap(gameObject, padding)
-    //this.physics.world.wrap(this.met, this.met.width * SCALE / 2);
-
+    ////////////////shoot//////////////////
     this.inputKeys.forEach(key => {
       // If key was just pressed down, shoot the laser. We use JustDown to make sure this only fires once.
       if (Phaser.Input.Keyboard.JustDown(key)) {
@@ -276,27 +219,5 @@ class Water9 extends Phaser.Scene {
       // fireballcount--;
     });
   }
-
-
-  //   // Horizontal movement
-  //   if (this.cursors.left.isDown) {
-  //     this.player.moveLeft();
-  //   } else if (this.cursors.right.isDown) {
-  //     this.player.moveRight();
-  //   }
-
-  //   // Vertical movement
-  //   if (this.cursors.up.isDown) {
-  //     this.player.moveUp();
-  //   } else if (this.cursors.down.isDown) {
-  //     this.player.moveDown();
-  //   }
-  // }
-
-  // update(time, delta) {
-  //     this.player.update();
-  //     // wrap the player and asteroids 
-  //     this.physics.world.wrap(this.player.sprite, 16);
-  // }
 
 }

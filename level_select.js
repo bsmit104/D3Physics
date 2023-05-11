@@ -3,11 +3,11 @@ class LaserGroup extends Phaser.Physics.Arcade.Group {
     constructor(scene) {
         // Call the super constructor, passing in a world and a scene
         super(scene.physics.world, scene);
-
+        // fireballcount--;
         // Initialize the group
         this.createMultiple({
             classType: Laser, // This is the class we create just below
-            frameQuantity: 20, // Create 30 instances in the pool
+            frameQuantity: 30, // Create 30 instances in the pool
             active: false,
             visible: false,
             key: 'laser'
@@ -17,6 +17,7 @@ class LaserGroup extends Phaser.Physics.Arcade.Group {
     }
 
     fireLaser(x, y) {
+        // fireballcount--;
         // Get the first available sprite in the group
         const laser = this.getFirstDead(false);
         if (laser) {
@@ -55,6 +56,7 @@ class Laser extends Phaser.Physics.Arcade.Sprite {
         super.preUpdate(time, delta);
 
         if (this.y <= 0) {
+            fireballcount--;
             this.setActive(false);
             this.setVisible(false);
         }
