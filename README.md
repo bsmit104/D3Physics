@@ -1,5 +1,5 @@
 # D3Physics  
-therealc3po and bsmit104 are both my accounts, code for player movement was used from Adam Smith's asteroids example. I also used https://www.codecaptain.io/blog/game-development/shooting-bullets-phaser-3-using-arcade-physics-groups/696 to create fireball shooting.
+therealc3po and bsmit104 are both my accounts, code for player movement was used from Adam Smith's asteroids example. I also used https://www.codecaptain.io/blog/game-development/shooting-bullets-phaser-3-using-arcade-physics-groups/696 to create fireball shooting.  
 GAME SATISFIES REQUREMENTS, SHOOTING DOES NOT CURRENTLY COLLIDE WITH OBSTACLES, FLIES THROUGH,  
 I WILL ALSO ADD ENEMY SHIPS, REQUIREMENTS ARE MET THO
   

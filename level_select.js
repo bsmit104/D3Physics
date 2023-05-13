@@ -56,7 +56,6 @@ class Laser extends Phaser.Physics.Arcade.Sprite {
         super.preUpdate(time, delta);
 
         if (this.y <= 0) {
-            fireballcount--;
             this.setActive(false);
             this.setVisible(false);
         }

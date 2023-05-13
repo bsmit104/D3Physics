@@ -92,21 +92,39 @@ class Sat extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
 
         //////////////rectangle spawn///////////////////
-        this.rectangle = this.add.rectangle(100, 500, 500, 100, 0xFF0000);
-        this.rectangle.setDepth(1);
-        this.rectangle.setStrokeStyle(4, 0x00FF00);
+        // this.rectangle = this.add.rectangle(100, 500, 500, 100, 0xFF0000);
+        // this.rectangle.setDepth(1);
+        // this.rectangle.setStrokeStyle(4, 0x00FF00);
 
-        this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0xFF0000); // x, y, width, height
-        this.rectangle2.setDepth(1);
-        this.rectangle2.setStrokeStyle(4, 0x00FF00);
+        // this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0xFF0000); // x, y, width, height
+        // this.rectangle2.setDepth(1);
+        // this.rectangle2.setStrokeStyle(4, 0x00FF00);
 
-        this.rectangle3 = this.add.rectangle(1700, 500, 1700, 100, 0xFF0000);
-        this.rectangle3.setDepth(1);
-        this.rectangle3.setStrokeStyle(4, 0x00FF00);
+        // this.rectangle3 = this.add.rectangle(1700, 500, 1700, 100, 0xFF0000);
+        // this.rectangle3.setDepth(1);
+        // this.rectangle3.setStrokeStyle(4, 0x00FF00);
 
-        this.rectangle4 = this.add.rectangle(700, 900, 500, 100, 0xFF0000);
-        this.rectangle4.setDepth(1);
-        this.rectangle4.setStrokeStyle(4, 0x00FF00);
+        // this.rectangle4 = this.add.rectangle(700, 900, 500, 100, 0xFF0000);
+        // this.rectangle4.setDepth(1);
+        // this.rectangle4.setStrokeStyle(4, 0x00FF00);
+
+        this.rectangleGroup = this.physics.add.group([
+            this.add.rectangle(100, 500, 500, 100, 0xFF0000)
+                .setDepth(1)
+                .setStrokeStyle(4, 0x00ff00),
+            
+            this.add.rectangle(900, 1300, 2100, 700, 0xFF0000)
+                .setDepth(1)
+                .setStrokeStyle(4, 0x00FF00),
+
+            this.add.rectangle(1700, 500, 1700, 100, 0xFF0000)
+                .setDepth(1)
+                .setStrokeStyle(4, 0x00FF00),
+
+            this.add.rectangle(700, 900, 500, 100, 0xFF0000)
+                .setDepth(1)
+                .setStrokeStyle(4, 0x00FF00),
+        ]);
 
         ///////////////house spawn//////////////////
         if (sathouse) {
@@ -185,23 +203,26 @@ class Sat extends Phaser.Scene {
         this.physics.add.collider(this.met, this.redhouse2, togameover, null, this);
         this.physics.add.collider(this.met, this.redhouse3, togameover, null, this);
 
-        this.physics.add.existing(this.rectangle);
-        this.physics.add.existing(this.rectangle2);
-        this.physics.add.existing(this.rectangle3);
-        this.physics.add.existing(this.rectangle4);
-        this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
-        this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
-        this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
-        this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
+        // this.physics.add.existing(this.rectangle);
+        // this.physics.add.existing(this.rectangle2);
+        // this.physics.add.existing(this.rectangle3);
+        // this.physics.add.existing(this.rectangle4);
+        this.physics.add.collider(this.met, this.rectangleGroup, togameover, null, this);
+        // this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
+        // this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+        // this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
+        // this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
 
         // this.physics.add.collider(this.laserGroup, this.rectangle, toexpl, null, this);
         // this.physics.add.collider(this.laserGroup, this.rectangle2, toexpl, null, this);
         // this.physics.add.collider(this.laserGroup, this.rectangle3, toexpl, null, this);
         // this.physics.add.collider(this.laserGroup, this.rectangle4, toexpl, null, this);
-        this.physics.add.overlap(this.laserGroup, this.rectangle, toexpl, null, this);
-        this.physics.add.overlap(this.laserGroup, this.rectangle2, toexpl, null, this);
-        this.physics.add.overlap(this.laserGroup, this.rectangle3, toexpl, null, this);
-        this.physics.add.overlap(this.laserGroup, this.rectangle4, toexpl, null, this);
+        this.physics.add.overlap(this.laserGroup, this.rectangleGroup, toexpl, null, this);
+        // this.physics.add.overlap(this.laserGroup, this.rectangle, toexpl, null, this);
+        // this.physics.add.overlap(this.laserGroup, this.rectangle2, toexpl, null, this);
+        // this.physics.add.overlap(this.laserGroup, this.rectangle3, toexpl, null, this);
+        // this.physics.add.overlap(this.laserGroup, this.rectangle4, toexpl, null, this);
+        // this.physics.add.overlap(this.laserGroup, this.rectangleGroup, toexpl, null, this);
 
         //////////////game over after 3 lives/////////////
         function togameover() {
@@ -238,9 +259,14 @@ class Sat extends Phaser.Scene {
         //   });
 
         //////////////trying to do collision for rectangle and fireball/////////////////////////
-        function toexpl() {
+        function toexpl(a,b) {
+            debugger;
             boom = true;
-            this.laserGroup.laserhit(boom);
+            a.hit(true);
+            // this.b.setActive(false);
+            // this.b.setVisible(false);
+
+            //this.laserGroup.laserhit(boom);
             // this.Laser.setActive(false);
             // this.Laser.setVisible(false);
             //this.Laser.hit(boom);

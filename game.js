@@ -70,6 +70,7 @@ let config = {
         }
     },
     scene: [Start, Intro, Title, Level_select, Water9, Sat, Cheese, Bluecheese, Earth, Gameover]
+    //scene: Sat
 };
 
 let game = new Phaser.Game(config);
