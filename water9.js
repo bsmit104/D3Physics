@@ -84,15 +84,26 @@ class Water9 extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     //////////////rectangle spawn//////////////////////
-    this.rectangle = this.add.rectangle(300, 400, 500, 200, 0xFFFFF);
-    this.rectangle.setDepth(1);
+    // this.rectangle = this.add.rectangle(300, 400, 500, 200, 0xFFFFF);
+    // this.rectangle.setDepth(1);
 
-    this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x1E90FF); // x, y, width, height
-    this.rectangle2.setDepth(1);
+    // this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x1E90FF); // x, y, width, height
+    // this.rectangle2.setDepth(1);
 
-    this.rectangle4 = this.add.rectangle(1100, 700, 500, 500, 0xFFFFF);
-    this.rectangle4.setDepth(1);
+    // this.rectangle4 = this.add.rectangle(1100, 700, 500, 500, 0xFFFFF);
+    // this.rectangle4.setDepth(1);
 
+
+    this.rectangleGroup2 = this.physics.add.group([
+      this.add.rectangle(300, 400, 500, 200, 0xFFFFF)
+      .setDepth(1),
+
+      this.add.rectangle(900, 1300, 2100, 700, 0x1E90FF) // x, y, width, height
+      .setDepth(1),
+
+      this.add.rectangle(1100, 700, 500, 500, 0xFFFFF)
+      .setDepth(1)
+  ]);
     /////////////////house spawn/////////////////////
     if (waterhouse) {
       this.bluehouse = this.physics.add.sprite(
@@ -167,13 +178,25 @@ class Water9 extends Phaser.Scene {
     this.physics.add.collider(this.laserGroup, this.bluehouse2, tohit2, null, this);
     this.physics.add.collider(this.laserGroup, this.bluehouse3, tohit3, null, this);
 
-    this.physics.add.existing(this.rectangle);
-    this.physics.add.existing(this.rectangle2);
-    this.physics.add.existing(this.rectangle4);
-    this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
-    this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
-    this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
+    // this.physics.add.existing(this.rectangle);
+    // this.physics.add.existing(this.rectangle2);
+    // this.physics.add.existing(this.rectangle4);
+    // this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
+    // this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+    // this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
+    this.physics.add.collider(this.met, this.rectangleGroup2, togameover, null, this);
     // Collision callback function
+
+    // this.physics.add.overlap(this.laserGroup, this.rectangle, toexpl, null, this);
+    // this.physics.add.overlap(this.laserGroup, this.rectangle2, toexpl, null, this);
+    // this.physics.add.overlap(this.laserGroup, this.rectangle4, toexpl, null, this);
+    this.physics.add.overlap(this.laserGroup, this.rectangleGroup2, toexpl, null, this);
+
+    function toexpl(a, b) {
+      //debugger;
+      boom = true;
+      a.hit(true);
+    }
 
     /////////game over///////////////
     function togameover() {
@@ -188,10 +211,13 @@ class Water9 extends Phaser.Scene {
     }
 
     //////////////destroy houses/////////////////
-    function tohit() {
+    function tohit(a, b) {
+      //debugger;
+      if (b) {
       waterhouse = false;
       this.bluehouse.destroy();
       score += 100;
+      }
     }
     function tohit2() {
       waterhouse2 = false;

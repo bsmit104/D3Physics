@@ -83,11 +83,19 @@ class Earth extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     ////////////spawn rectangles//////////////////
-    this.rectangle = this.add.rectangle(950, 500, 1200, 50, 0xFFFFFF);
-    this.rectangle.setDepth(1);
+    // this.rectangle = this.add.rectangle(950, 500, 1200, 50, 0xFFFFFF);
+    // this.rectangle.setDepth(1);
 
-    this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x8A9A5B); // x, y, width, height
-    this.rectangle2.setDepth(1);
+    // this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0x8A9A5B); // x, y, width, height
+    // this.rectangle2.setDepth(1);
+
+    this.rectangleGroup3 = this.physics.add.group([
+      this.add.rectangle(950, 500, 1200, 50, 0xFFFFFF)
+      .setDepth(1),
+
+      this.add.rectangle(900, 1300, 2100, 700, 0x8A9A5B) // x, y, width, height
+      .setDepth(1),
+  ]);
 
     //////////////spawn houses///////////////////
     if (earthhouse) {
@@ -153,6 +161,16 @@ class Earth extends Phaser.Scene {
       // this.rightKey.tint = 0xFFFFFF;
     }
 
+    // this.rectangle.body.immovable = true;
+    // this.rectangle2.body.immovable = true;
+    // this.laserGroup.children.entries.forEach((laser) => {
+    //   this.physics.add.collider(laser, this.rectangle, () => {
+    //     laser.destroy();
+    //   });
+    //   this.physics.add.collider(laser, this.rectangle2, () => {
+    //     laser.destroy();
+    //   });
+    // })
     /////////////////collisions///////////////
     this.physics.add.collider(this.met, this.ehouse, togameover, null, this);
     this.physics.add.collider(this.met, this.ehouse2, togameover, null, this);
@@ -162,10 +180,21 @@ class Earth extends Phaser.Scene {
     this.physics.add.collider(this.laserGroup, this.ehouse2, tohit2, null, this);
     this.physics.add.collider(this.laserGroup, this.ehouse3, tohit3, null, this);
 
-    this.physics.add.existing(this.rectangle);
-    this.physics.add.existing(this.rectangle2);
-    this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
-    this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+    // this.physics.add.existing(this.rectangle);
+    // this.physics.add.existing(this.rectangle2);
+    // this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
+    // this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+    this.physics.add.collider(this.met, this.rectangleGroup3, togameover, null, this);
+
+    // this.physics.add.overlap(this.laserGroup, this.rectangle, toexpl, null, this);
+    // this.physics.add.overlap(this.laserGroup, this.rectangle2, toexpl, null, this);
+    this.physics.add.overlap(this.laserGroup, this.rectangleGroup3, toexpl, null, this);
+
+    function toexpl(a,b) {
+      //debugger;
+      boom = true;
+      a.hit(true);
+  }
 
     /////////////game over////////////////
     function togameover() {

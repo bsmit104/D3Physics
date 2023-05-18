@@ -82,32 +82,61 @@ class Cheese extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     /////////////////rectangle spawn////////////////////
-    this.rectangle = this.add.rectangle(400, 300, 200, 150, 0xFF8C00);
-    this.rectangle.setDepth(1);
-    this.rectangle.setStrokeStyle(4, 0x00FF00);
-    this.rectangle.setOrigin(0.5);
+    this.rectangleGroup4 = this.physics.add.group([
+    this.add.rectangle(400, 300, 200, 150, 0xFF8C00)
+    .setDepth(1)
+    .setStrokeStyle(4, 0x00FF00)
+    .setOrigin(0.5),
     //this.rectangle.setAngle(45);
 
-    this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0xFF8C00); // x, y, width, height
-    this.rectangle2.setDepth(1);
-    this.rectangle2.setStrokeStyle(4, 0x00FF00);
+    this.add.rectangle(900, 1300, 2100, 700, 0xFF8C00) // x, y, width, height
+    .setDepth(1)
+    .setStrokeStyle(4, 0x00FF00),
 
-    this.rectangle3 = this.add.rectangle(900, 500, 200, 150, 0xFF8C00);
-    this.rectangle3.setDepth(1);
-    this.rectangle3.setStrokeStyle(4, 0x00FF00);
-    this.rectangle3.setOrigin(0.5);
+    this.add.rectangle(900, 500, 200, 150, 0xFF8C00)
+    .setDepth(1)
+    .setStrokeStyle(4, 0x00FF00)
+    .setOrigin(0.5),
     //this.rectangle3.setAngle(-45);
 
-    this.rectangle4 = this.add.rectangle(1700, 500, 200, 150, 0xFF8C00);
-    this.rectangle4.setDepth(1);
-    this.rectangle4.setStrokeStyle(4, 0x00FF00);
-    this.rectangle4.setOrigin(0.5);
+    this.add.rectangle(1700, 500, 200, 150, 0xFF8C00)
+    .setDepth(1)
+    .setStrokeStyle(4, 0x00FF00)
+    .setOrigin(0.5),
     //this.rectangle4.setAngle(-45);
 
-    this.rectangle5 = this.add.rectangle(1400, 300, 200, 150, 0xFF8C00);
-    this.rectangle5.setDepth(1);
-    this.rectangle5.setStrokeStyle(4, 0x00FF00);
-    this.rectangle5.setOrigin(0.5);
+    this.add.rectangle(1400, 300, 200, 150, 0xFF8C00)
+    .setDepth(1)
+    .setStrokeStyle(4, 0x00FF00)
+    .setOrigin(0.5)
+  ]);
+
+    // this.rectangle = this.add.rectangle(400, 300, 200, 150, 0xFF8C00);
+    // this.rectangle.setDepth(1);
+    // this.rectangle.setStrokeStyle(4, 0x00FF00);
+    // this.rectangle.setOrigin(0.5);
+    // //this.rectangle.setAngle(45);
+
+    // this.rectangle2 = this.add.rectangle(900, 1300, 2100, 700, 0xFF8C00); // x, y, width, height
+    // this.rectangle2.setDepth(1);
+    // this.rectangle2.setStrokeStyle(4, 0x00FF00);
+
+    // this.rectangle3 = this.add.rectangle(900, 500, 200, 150, 0xFF8C00);
+    // this.rectangle3.setDepth(1);
+    // this.rectangle3.setStrokeStyle(4, 0x00FF00);
+    // this.rectangle3.setOrigin(0.5);
+    // //this.rectangle3.setAngle(-45);
+
+    // this.rectangle4 = this.add.rectangle(1700, 500, 200, 150, 0xFF8C00);
+    // this.rectangle4.setDepth(1);
+    // this.rectangle4.setStrokeStyle(4, 0x00FF00);
+    // this.rectangle4.setOrigin(0.5);
+    // //this.rectangle4.setAngle(-45);
+
+    // this.rectangle5 = this.add.rectangle(1400, 300, 200, 150, 0xFF8C00);
+    // this.rectangle5.setDepth(1);
+    // this.rectangle5.setStrokeStyle(4, 0x00FF00);
+    // this.rectangle5.setOrigin(0.5);
     //this.rectangle5.setAngle(45);
 
     //////////////////////house spawn/////////////////////
@@ -181,20 +210,34 @@ class Cheese extends Phaser.Scene {
     this.physics.add.collider(this.met, this.phouse2, togameover, null, this);
     this.physics.add.collider(this.met, this.phouse3, togameover, null, this);
 
-    this.physics.add.collider(this.laserGroup, this.phouse, tohit, null, this);
-    this.physics.add.collider(this.laserGroup, this.phouse2, tohit2, null, this);
-    this.physics.add.collider(this.laserGroup, this.phouse3, tohit3, null, this);
+    this.physics.add.overlap(this.laserGroup, this.phouse, tohit, null, this);
+    this.physics.add.overlap(this.laserGroup, this.phouse2, tohit2, null, this);
+    this.physics.add.overlap(this.laserGroup, this.phouse3, tohit3, null, this);
 
-    this.physics.add.existing(this.rectangle);
-    this.physics.add.existing(this.rectangle2);
-    this.physics.add.existing(this.rectangle3);
-    this.physics.add.existing(this.rectangle4);
-    this.physics.add.existing(this.rectangle5);
-    this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
-    this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
-    this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
-    this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
-    this.physics.add.collider(this.met, this.rectangle5, togameover, null, this);
+    // this.physics.add.existing(this.rectangle);
+    // this.physics.add.existing(this.rectangle2);
+    // this.physics.add.existing(this.rectangle3);
+    // this.physics.add.existing(this.rectangle4);
+    // this.physics.add.existing(this.rectangle5);
+    // this.physics.add.collider(this.met, this.rectangle, togameover, null, this);
+    // this.physics.add.collider(this.met, this.rectangle2, togameover, null, this);
+    // this.physics.add.collider(this.met, this.rectangle3, togameover, null, this);
+    // this.physics.add.collider(this.met, this.rectangle4, togameover, null, this);
+    // this.physics.add.collider(this.met, this.rectangle5, togameover, null, this);
+    this.physics.add.collider(this.met, this.rectangleGroup4, togameover, null, this);
+
+    // this.physics.add.overlap(this.laserGroup, this.rectangle, toexpl, null, this);
+    // this.physics.add.overlap(this.laserGroup, this.rectangle2, toexpl, null, this);
+    // this.physics.add.overlap(this.laserGroup, this.rectangle3, toexpl, null, this);
+    // this.physics.add.overlap(this.laserGroup, this.rectangle4, toexpl, null, this);
+    // this.physics.add.overlap(this.laserGroup, this.rectangle5, toexpl, null, this);
+    this.physics.add.overlap(this.laserGroup, this.rectangleGroup4, toexpl, null, this);
+
+    function toexpl(a, b) {
+      //debugger;
+      boom = true;
+      a.hit(true);
+    }
 
     // Collision callback function
     function togameover() {
@@ -211,20 +254,26 @@ class Cheese extends Phaser.Scene {
     }
 
     ///////////////destroy houses////////////////
-    function tohit() {
+    function tohit(a, b) {
+      if (b.setActive == true) {
       cheesehouse = false;
       this.phouse.destroy();
       score += 100;
+      }
     }
-    function tohit2() {
+    function tohit2(a, b) {
+      if (b.setActive == true) {
       cheesehouse2 = false;
       this.phouse2.destroy();
       score += 100;
+      }
     }
-    function tohit3() {
+    function tohit3(a, b) {
+      if (b.setActive == true) {
       cheesehouse3 = false;
       this.phouse3.destroy();
       score += 100;
+      }
     }
 
     ////////////////////to menu/////////////////////

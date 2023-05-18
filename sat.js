@@ -260,25 +260,9 @@ class Sat extends Phaser.Scene {
 
         //////////////trying to do collision for rectangle and fireball/////////////////////////
         function toexpl(a,b) {
-            debugger;
+            //debugger;
             boom = true;
             a.hit(true);
-            // this.b.setActive(false);
-            // this.b.setVisible(false);
-
-            //this.laserGroup.laserhit(boom);
-            // this.Laser.setActive(false);
-            // this.Laser.setVisible(false);
-            //this.Laser.hit(boom);
-            // Trigger the scene change here
-            // For example:
-            //console.log(laserGroup);
-            // this.laser.destroy();
-            // this.laserGroup.disableBody(true, true);
-            //this.laserGroup.enable = true;
-            // this.laserGroup.setActive(false);
-            // this.laserGroup.setVisible(false);
-            //this.laserGroup.enable = false;
         }
 
         ////////////destroy houses when hit//////////////////

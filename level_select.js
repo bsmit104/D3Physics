@@ -68,6 +68,15 @@ class Laser extends Phaser.Physics.Arcade.Sprite {
             //this.destroy();
         }
     }
+
+    vis(x) {
+        if (this.setActive(false)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     /////////////////////////////////////
 }
 class Level_select extends Phaser.Scene {
